@@ -1,0 +1,15 @@
+---
+ref: stackstorm_workflow_testing
+name: DD Azure VM provision
+description: this is a testing pack
+keywords:
+  - testing
+  - workflow
+  - stackstorm
+version: 1.0
+python_version: 
+  - "2"
+author: StackStorm, Inc.
+email: info@stackstorm.com
+contributors:
+  - "pradipta das<pradipta.das115@gmail.com>"
