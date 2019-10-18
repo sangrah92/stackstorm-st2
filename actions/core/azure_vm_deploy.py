@@ -12,6 +12,7 @@ class arm_template_provision(Action):
     
     
     def __init__(self, client_id,resource_group, subscription_number, tanent_id, serect, region):
+        print("test------------------------------>>>>")
         try:
             # super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
             _client_id = client_id
