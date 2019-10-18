@@ -36,7 +36,7 @@ parameters:
         description: region 
         required: true
         position: 6
-    template_json:
+    template_file:
         type: string
         description: template path file 
         required: false

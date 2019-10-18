@@ -4,12 +4,12 @@ from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import DeploymentMode
 
-from st2client.client import Client
-from st2client.models import KeyValuePair
+# from st2client.client import Client
+# from st2client.models import KeyValuePair
 import os,sys,json,random
 
 class arm_template_provision(Action):
-    client = Client(base_url='http://localhost')
+    
     
     def __init__(self, client_id,resource_group, subscription_number, tanent_id, serect, region):
         super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
@@ -54,7 +54,7 @@ class arm_template_provision(Action):
                 'parameters': format_parameters
             }
 
-            deployment_async_operation = self.resource_group_client.deployments.create_or_update(self.resource_group,self.vm_name,deployment_properties)
+            deployment_async_operation = self.resource_group_client.deployments.create_or_update(self._resource_group,self._vm_name,deployment_properties)
             result = deployment_async_operation.status()
             deployment_async_operation.wait()
             return(True,result)
