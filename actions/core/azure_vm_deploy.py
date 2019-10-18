@@ -12,27 +12,30 @@ class arm_template_provision(Action):
     
     
     def __init__(self, client_id,resource_group, subscription_number, tanent_id, serect, region):
-        # super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
-        _client_id = client_id
-        _vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
-        _client_secret = serect
-        _tenant_id = tanent_id
-        _subscription_id = subscription_number
-        _resource_group = resource_group
-        
-        credentials = ServicePrincipalCredentials(
-            client_id = _client_id,
-            secret = _client_secret,
-            tenant = _tenant_id
-        )
-        resource_group_params = {'location':region}
-        
-        resource_group_client = ResourceManagementClient(
-            credentials,
-            _subscription_id
-        )
-        
-        resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
+        try:
+            # super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
+            _client_id = client_id
+            _vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
+            _client_secret = serect
+            _tenant_id = tanent_id
+            _subscription_id = subscription_number
+            _resource_group = resource_group
+            
+            credentials = ServicePrincipalCredentials(
+                client_id = _client_id,
+                secret = _client_secret,
+                tenant = _tenant_id
+            )
+            resource_group_params = {'location':region}
+            
+            resource_group_client = ResourceManagementClient(
+                credentials,
+                _subscription_id
+            )
+            
+            resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
+        except Exception as e:
+            print(e)
         
     def get_template_path(self, existing_template_path):
         file_path = os.path.dirname(os.path.realpath(__file__ + "../templates/"))
