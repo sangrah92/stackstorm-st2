@@ -6,35 +6,40 @@ description: deploy azure VM
 enabled: true
 entry_point: deploy.sh
 parameters:
+    client_id:
+        type: string
+        description: Client ID
+        required: true
+        position: 1
     resource_group:
         type: string
         description: resource group name 
         required: true
-        position: 1
+        position: 2
     subscription_number:
         type: string
         description: subscription number 
         required: true
-        position: 2
+        position: 3
     tanent_id:
         type: string
         description: tananent ID  
         required: true
-        position: 3
+        position: 4
     serect:
         type: string
         description: secrect 
         required: true
-        position: 4
+        position: 5
     region:
         type: string
         description: region 
         required: true
-        position: 5
+        position: 6
     template_json:
         type: string
         description: template path file 
         required: false
-        position: 6
+        position: 7
         default: "SXDEMODEPLOYMENT.json"
     
