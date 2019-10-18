@@ -30,7 +30,7 @@ class deploy_arm_template(Action):
             )
             
             resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
-            response = self.deploy_vm(template_file,resource_group,vm_name)
+            response = self.deploy_vm(template_file,resource_group,vm_name,resource_group_client)
             return (True,response)
         except Exception as e:
             return(False,str(e))
@@ -39,7 +39,7 @@ class deploy_arm_template(Action):
         file_path = os.path.dirname(os.path.realpath(__file__ ))
         return file_path+ "/templates/"+ existing_template_path
     
-    def deploy_vm(self, existing_template_path,resource_group,vm_name):
+    def deploy_vm(self, existing_template_path,resource_group,vm_name,resource_group_client):
         try:
             template_path = self.get_template_path(existing_template_path)
 
