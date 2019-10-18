@@ -33,8 +33,8 @@ parameters:
         position: 5
     template_json:
         type: string
-        description: region 
-        required: true
+        description: template path file 
+        required: false
         position: 6
         default: "SXDEMODEPLOYMENT.json"
     
