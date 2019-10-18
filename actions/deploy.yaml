@@ -1,0 +1,40 @@
+---
+name: deploy
+pack: dd_shieldx_azure_vm_provision
+runner_type: "python-script"
+description: deploy azure VM 
+enabled: true
+entry_point: deploy.sh
+parameters:
+    resource_group:
+        type: string
+        description: resource group name 
+        required: true
+        position: 1
+    subscription_number:
+        type: string
+        description: subscription number 
+        required: true
+        position: 2
+    tanent_id:
+        type: string
+        description: tananent ID  
+        required: true
+        position: 3
+    serect:
+        type: string
+        description: secrect 
+        required: true
+        position: 4
+    region:
+        type: string
+        description: region 
+        required: tru
+        position: 5
+    template_json:
+        type: string
+        description: region 
+        required: true
+        position: 6
+        default: "SXDEMODEPLOYMENT.json"
+    
