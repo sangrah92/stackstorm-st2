@@ -29,7 +29,7 @@ parameters:
     region:
         type: string
         description: region 
-        required: tru
+        required: true
         position: 5
     template_json:
         type: string
