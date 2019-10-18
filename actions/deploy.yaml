@@ -4,7 +4,7 @@ pack: dd_shieldx_azure_vm_provision
 runner_type: "python-script"
 description: deploy azure VM 
 enabled: true
-entry_point: deploy.sh
+entry_point: deploy.py
 parameters:
     client_id:
         type: string
