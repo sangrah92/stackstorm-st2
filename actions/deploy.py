@@ -36,8 +36,8 @@ class deploy_arm_template(Action):
             return(False,str(e))
 
     def get_template_path(self, existing_template_path):
-        file_path = os.path.dirname(os.path.realpath(__file__ + "/templates/"))
-        return file_path + existing_template_path
+        file_path = os.path.dirname(os.path.realpath(__file__ ))
+        return file_path+ "/templates/"+ existing_template_path
     
     def deploy_vm(self, existing_template_path,resource_group,vm_name):
         try:
