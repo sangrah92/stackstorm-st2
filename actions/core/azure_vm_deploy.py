@@ -12,7 +12,7 @@ class arm_template_provision(Action):
     
     
     def __init__(self, client_id,resource_group, subscription_number, tanent_id, serect, region):
-        super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
+        # super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
         _client_id = ""
         _vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
         _client_secret = serect
