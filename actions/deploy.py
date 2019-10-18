@@ -55,7 +55,7 @@ class deploy_arm_template(Action):
                 'parameters': format_parameters
             }
 
-            deployment_async_operation = self.resource_group_client.deployments.create_or_update(resource_group,vm_name,deployment_properties)
+            deployment_async_operation = resource_group_client.deployments.create_or_update(resource_group,vm_name,deployment_properties)
             result = deployment_async_operation.status()
             deployment_async_operation.wait()
             return result
