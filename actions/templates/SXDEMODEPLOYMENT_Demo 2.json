@@ -1,0 +1,926 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_SXDEMODEPLOYUM_name": {
+            "defaultValue": "SXDEMODEPLOYUM",
+            "type": "String"
+        },
+        "networkInterfaces_sxdemodeployum658_name": {
+            "defaultValue": "sxdemodeployum658",
+            "type": "String"
+        },
+        "publicIPAddresses_SXDEMODEPLOYUM_ip_name": {
+            "defaultValue": "SXDEMODEPLOYUM-ip",
+            "type": "String"
+        },
+        "networkInterfaces_sxdemodeploywl2735_name": {
+            "defaultValue": "sxdemodeploywl2735",
+            "type": "String"
+        },
+        "networkInterfaces_sxdemodeploywl3712_name": {
+            "defaultValue": "sxdemodeploywl3712",
+            "type": "String"
+        },
+        "virtualNetworks_SXDEMODEPLOYMENTVNET_name": {
+            "defaultValue": "SXDEMODEPLOYMENTVNET",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_name": {
+            "defaultValue": "SXDEMODEPLOYMENTInnerLB",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_name": {
+            "defaultValue": "SXDEMODEPLOYMENTOuterLB",
+            "type": "String"
+        },
+        "networkInterfaces_sxdemodeploymentwl1234_name": {
+            "defaultValue": "sxdemodeploymentwl1234",
+            "type": "String"
+        },
+        "networkInterfaces_sxdemodeployutilserv278_name": {
+            "defaultValue": "sxdemodeployutilserv278",
+            "type": "String"
+        },
+        "networkSecurityGroups_SXDEMODEPLOYMENTNSG_name": {
+            "defaultValue": "SXDEMODEPLOYMENTNSG",
+            "type": "String"
+        },
+        "publicIPAddresses_SXDEMODEPLOYMENTOuterIP_name": {
+            "defaultValue": "SXDEMODEPLOYMENTOuterIP",
+            "type": "String"
+        },
+        "publicIPAddresses_SXDEMODEPLOYUtilServer_ip_name": {
+            "defaultValue": "SXDEMODEPLOYUtilServer-ip",
+            "type": "String"
+        },
+        "securityRules_Port_80_name": {
+            "defaultValue": "Port_80",
+            "type": "String"
+        },
+        "securityRules_Port_443_name": {
+            "defaultValue": "Port_443",
+            "type": "String"
+        },
+        "securityRules_Port_22_name": {
+            "defaultValue": "Port_22",
+            "type": "String"
+        },
+        "subnets_SXDEMODEPLOYMENTMGMT_name": {
+            "defaultValue": "SXDEMODEPLOYMENTMGMT",
+            "type": "String"
+        },
+        "subnets_SXDEMODEPLOYMENTBKPL_name": {
+            "defaultValue": "SXDEMODEPLOYMENTBKPL",
+            "type": "String"
+        },
+        "subnets_SXDEMODEPLOYMENTInnerSub_name": {
+            "defaultValue": "SXDEMODEPLOYMENTInnerSub",
+            "type": "String"
+        },
+        "subnets_SXDEMODEPLOYMENTUtilserSub_name": {
+            "defaultValue": "SXDEMODEPLOYMENTUtilserSub",
+            "type": "String"
+        },
+        "virtualMachines_SXDEMODEPLOYUM_id": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SheildX_POC/providers/Microsoft.Compute/images/ShieldX-ESP-sxrel2.0.1134",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id_1": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/backendAddressPools/SXDEMODEPLOYInnerpool",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id_2": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/probes/SXDEMODEPLOYHPone",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id_3": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id_4": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/backendAddressPools/SXDEMODEPLOYInnerpool",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTInnerLB_id_5": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB/probes/SXDEMODEPLOYHPone",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id_1": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/backendAddressPools/SXDEMODEPLOYMENTOuterpool",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id_2": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/probes/SXDEMODEPLOYMENTOuterHPone",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id_3": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id_4": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/backendAddressPools/SXDEMODEPLOYMENTOuterpool",
+            "type": "String"
+        },
+        "loadBalancers_SXDEMODEPLOYMENTOuterLB_id_5": {
+            "defaultValue": "/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB/probes/SXDEMODEPLOYMENTOuterHPone",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Compute/virtualMachines/SXDEMODEPLOYUM'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_SXDEMODEPLOYUM_name')]",
+            "apiVersion": "2017-03-30",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS13_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "[parameters('virtualMachines_SXDEMODEPLOYUM_id')]"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_SXDEMODEPLOYUM_name'),'_disk1_630fd2aa74d44399919070331636fbd3')]",
+                        "createOption": "FromImage",
+                        "caching": "None",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        },
+                        "diskSizeGB": 100
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_SXDEMODEPLOYUM_name')]",
+                    "adminUsername": "shieldx",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/shieldx/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAoxrZTUCR46JpqxoE6sRQy3AMM2UPmgZPk6uvIweGc1DcELO9mvM9tqZ7rflIPWH1JvLnuzadSUp9oiW8i2dngcDDFlLHAhJO31P4foSzdAyt5ClyYpkVCiewBz3XdkC4vGEomiTOrpZyi8FNo7DJu44cduJtf+Kfolf+MJMYw5Z+nmIcCj825eYJlFKcbYu2p3gutQ09To/xpL5L2IK54wtkcorQaDVOuBnpG8Sy/HoY/fn3EIt/14ASJqxfTSL5zrtXb9pNd/kfUP8Xpa7dvaMpMNmNyKaR67bUr9fhY42MZYi1B1gUPSJFlOV8k8A/vAGukzTOuOb8bvDcPO83iQ=="
+                                }
+                            ]
+                        }
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_sxdemodeployum658_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_sxdemodeployum658_name'))]"
+            ]
+        },        
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTInnerLB'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+                "name": "Standard"
+            },
+            "name": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_name')]",
+            "apiVersion": "2019-06-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "4362e976-3259-4ec0-8416-9a03f0277628",
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "etag": "W/\"6b3244dc-8f3b-4586-a453-d059907f0f2b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAddress": "10.44.6.50",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTInnerSub_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "SXDEMODEPLOYInnerpool",
+                        "etag": "W/\"6b3244dc-8f3b-4586-a453-d059907f0f2b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded"
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "SXDEMODEPLOYInnerruleone",
+                        "etag": "W/\"6b3244dc-8f3b-4586-a453-d059907f0f2b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id')]"
+                            },
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp",
+                            "loadDistribution": "Default",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id_1')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id_2')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SXDEMODEPLOYInnerruletwo",
+                        "etag": "W/\"6b3244dc-8f3b-4586-a453-d059907f0f2b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id_3')]"
+                            },
+                            "frontendPort": 8080,
+                            "backendPort": 8080,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp",
+                            "loadDistribution": "Default",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id_4')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTInnerLB_id_5')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "SXDEMODEPLOYHPone",
+                        "etag": "W/\"6b3244dc-8f3b-4586-a453-d059907f0f2b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "Tcp",
+                            "port": 80,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "inboundNatRules": [],
+                "outboundNatRules": [],
+                "inboundNatPools": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTInnerSub_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/loadBalancers/SXDEMODEPLOYMENTOuterLB'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+                "name": "Standard"
+            },
+            "name": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "9a1ee21d-ac11-4f07-9ace-bbd4f76ad747",
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "etag": "W/\"fee19835-e1c6-4eef-9071-29276a08c3ce\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYMENTOuterIP_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "SXDEMODEPLOYMENTOuterpool",
+                        "etag": "W/\"fee19835-e1c6-4eef-9071-29276a08c3ce\"",
+                        "properties": {
+                            "provisioningState": "Succeeded"
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "SXDEMODEPLOYMENTOuterruleone",
+                        "etag": "W/\"fee19835-e1c6-4eef-9071-29276a08c3ce\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id')]"
+                            },
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp",
+                            "loadDistribution": "Default",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id_1')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id_2')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SXDEMODEPLOYMENTOuterruletwo",
+                        "etag": "W/\"fee19835-e1c6-4eef-9071-29276a08c3ce\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id_3')]"
+                            },
+                            "frontendPort": 8080,
+                            "backendPort": 8080,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp",
+                            "loadDistribution": "Default",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id_4')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_SXDEMODEPLOYMENTOuterLB_id_5')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "SXDEMODEPLOYMENTOuterHPone",
+                        "etag": "W/\"fee19835-e1c6-4eef-9071-29276a08c3ce\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "Http",
+                            "port": 22222,
+                            "requestPath": "/",
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "inboundNatRules": [],
+                "outboundNatRules": [],
+                "inboundNatPools": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYMENTOuterIP_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/networkInterfaces/sxdemodeployum658'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_sxdemodeployum658_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "280513f9-f49b-4280-817f-3f16504d5e4f",
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "etag": "W/\"089d4c99-f626-462f-becb-206fd9e97a3f\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAddress": "10.44.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYUM_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTMGMT_name'))]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [],
+                    "appliedDnsServers": [],
+                    "internalDomainNameSuffix": "04xregb4nhmeziz3wtjk0crodh.dx.internal.cloudapp.net"
+                },
+                "macAddress": "00-0D-3A-37-05-B0",
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+                },
+                "primary": true,
+                "virtualMachine": {
+                    "id": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_SXDEMODEPLOYUM_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYUM_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTMGMT_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/networkInterfaces/sxdemodeployutilserv278'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_sxdemodeployutilserv278_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "09989d51-044a-4bc9-b9d2-d37de45ba1a8",
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "etag": "W/\"a95441e1-d1e5-44e8-bd53-0af80bde9b35\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAddress": "10.44.10.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYUtilServer_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTUtilserSub_name'))]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [],
+                    "appliedDnsServers": [],
+                    "internalDomainNameSuffix": "04xregb4nhmeziz3wtjk0crodh.dx.internal.cloudapp.net"
+                },
+                "macAddress": "00-0D-3A-3A-EA-F5",
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+                },
+                "primary": true,
+                "virtualMachine": {
+                    "id": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_SXDEMODEPLOYUtilServer_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_SXDEMODEPLOYUtilServer_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), parameters('subnets_SXDEMODEPLOYMENTUtilserSub_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/networkSecurityGroups/SXDEMODEPLOYMENTNSG'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "e47732cb-0184-4d46-8a8a-90f4f60b0993",
+                "securityRules": [
+                    {
+                        "name": "Port_80",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "50.201.196.40/29",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "Port_443",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "443",
+                            "sourceAddressPrefix": "50.201.196.40/29",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 101,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "Port_22",
+                        "etag": "W/\"22b4e269-4d56-457b-821f-6466569ab215\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "SSH access",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "50.201.196.40/29",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 103,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ],
+                "defaultSecurityRules": [
+                    {
+                        "name": "AllowVnetInBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowAzureLoadBalancerInBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from azure load balancer",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "AzureLoadBalancer",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllInBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all inbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowVnetOutBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowInternetOutBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to Internet",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "Internet",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllOutBound",
+                        "etag": "W/\"1865e287-a237-40e7-b0eb-0a4d9d08bc59\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all outbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/publicIPAddresses/SXDEMODEPLOYMENTOuterIP'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "standard"
+            },
+            "name": "[parameters('publicIPAddresses_SXDEMODEPLOYMENTOuterIP_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "b1c40e1c-6a95-4fba-95fa-cfd392eb9e7d",
+                "ipAddress": "138.91.227.194",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/publicIPAddresses/SXDEMODEPLOYUM-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Basic"
+            },
+            "name": "[parameters('publicIPAddresses_SXDEMODEPLOYUM_ip_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "8e45da98-6258-4276-9fcc-4e9f46d48f01",
+                "ipAddress": "23.99.84.28",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/publicIPAddresses/SXDEMODEPLOYUtilServer-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Basic"
+            },
+            "name": "[parameters('publicIPAddresses_SXDEMODEPLOYUtilServer_ip_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "31dac48b-c83a-4b60-a483-a2285223d10e",
+                "ipAddress": "104.42.30.237",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/virtualNetworks/SXDEMODEPLOYMENTVNET'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "centralus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "1812afd7-693e-4cd8-a33d-b4d2ad0a2e1f",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.44.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "SXDEMODEPLOYMENTMGMT",
+                        "etag": "W/\"98959000-6456-42ae-809a-535717bced0b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.44.1.0/24"
+                        }
+                    },
+                    {
+                        "name": "SXDEMODEPLOYMENTBKPL",
+                        "etag": "W/\"98959000-6456-42ae-809a-535717bced0b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.44.2.0/24",
+                            "serviceEndpoints": []
+                        }
+                    },
+                    {
+                        "name": "SXDEMODEPLOYMENTUtilserSub",
+                        "etag": "W/\"98959000-6456-42ae-809a-535717bced0b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.44.10.0/24",
+                            "serviceEndpoints": []
+                        }
+                    },
+                    {
+                        "name": "SXDEMODEPLOYMENTInnerSub",
+                        "etag": "W/\"98959000-6456-42ae-809a-535717bced0b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.44.6.0/24",
+                            "serviceEndpoints": []
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/networkSecurityGroups/SXDEMODEPLOYMENTNSG/securityRules/Port_80'.",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "name": "[concat(parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'), '/', parameters('securityRules_Port_80_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "80",
+                "sourceAddressPrefix": "50.201.196.40/29",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 100,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/networkSecurityGroups/SXDEMODEPLOYMENTNSG/securityRules/Port_443'.",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "name": "[concat(parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'), '/', parameters('securityRules_Port_443_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "443",
+                "sourceAddressPrefix": "50.201.196.40/29",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 101,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_SXDEMODEPLOYMENTNSG_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/virtualNetworks/SXDEMODEPLOYMENTVNET/subnets/SXDEMODEPLOYMENTMGMT'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), '/', parameters('subnets_SXDEMODEPLOYMENTMGMT_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.44.1.0/24"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/virtualNetworks/SXDEMODEPLOYMENTVNET/subnets/SXDEMODEPLOYMENTBKPL'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), '/', parameters('subnets_SXDEMODEPLOYMENTBKPL_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.44.2.0/24",
+                "serviceEndpoints": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/virtualNetworks/SXDEMODEPLOYMENTVNET/subnets/SXDEMODEPLOYMENTUtilserSub'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), '/', parameters('subnets_SXDEMODEPLOYMENTUtilserSub_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.44.10.0/24",
+                "serviceEndpoints": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/f046e103-e81f-46e5-aab9-9d8798790266/resourceGroups/SXDEMODEPLOYMENT/providers/Microsoft.Network/virtualNetworks/SXDEMODEPLOYMENTVNET/subnets/SXDEMODEPLOYMENTInnerSub'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'), '/', parameters('subnets_SXDEMODEPLOYMENTInnerSub_name'))]",
+            "apiVersion": "2017-10-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.44.6.0/24",
+                "serviceEndpoints": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_SXDEMODEPLOYMENTVNET_name'))]"
+            ]
+        }
+    ]
+}

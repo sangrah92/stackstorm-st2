@@ -41,5 +41,5 @@ parameters:
         description: template path file 
         required: false
         position: 7
-        default: "SXDEMODEPLOYMENT.json"
+        default: "SXDEMODEPLOYMENT_Demo 2.json"
     
