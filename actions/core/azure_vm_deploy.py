@@ -11,32 +11,30 @@ import os,sys,json,random
 class arm_template_provision(Action):
     
     
-    def __init__(self, client_id,resource_group, subscription_number, tanent_id, serect, region):
-        super(arm_template_provision, self).__init__(client_id,resource_group, subscription_number, tanent_id, serect, region)
-        _client_id = ""
-        _vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
-        _client_secret = serect
-        _tenant_id = tanent_id
-        _subscription_id = subscription_number
-        _resource_group = resource_group
-        
+    def __init__(self,config):
+        super(arm_template_provision, self).__init__(config)
+
+    def auth(self,client_id,resource_group, subscription_number, tanent_id, serect, region):
+        self.vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
+        self.resource_group = resource_group
+        self.location = region
         credentials = ServicePrincipalCredentials(
-            client_id = _client_id,
-            secret = _client_secret,
-            tenant = _tenant_id
+            client_id = client_id,
+            secret = serect,
+            tenant = tanent_id
         )
         resource_group_params = {'location':region}
         
-        resource_group_client = ResourceManagementClient(
+        self.resource_group_client = ResourceManagementClient(
             credentials,
-            _subscription_id
+            subscription_number
         )
         
-        resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
+        self.resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
         
     def get_template_path(self, existing_template_path):
-        file_path = os.path.dirname(os.path.realpath(__file__ + "../templates/"))
-        return file_path + existing_template_path
+        file_path = os.path.dirname(os.path.realpath(__file__+"/../"))
+        return file_path + "/templates/"+ existing_template_path
     
     def deploy_vm(self, existing_template_path):
         try:
@@ -46,7 +44,8 @@ class arm_template_provision(Action):
                 template = json.load(f)
 
             parameters  = template['parameters']
-            format_parameters = {k: {'value': v} for k, v in parameters.items()}    
+            default_parameters = {k: v['defaultValue'] for k, v in parameters.items()}
+            format_parameters = {k: {'value': v} for k, v in default_parameters.items()}    
             
             deployment_properties = {
                 'mode': DeploymentMode.incremental,
@@ -54,9 +53,11 @@ class arm_template_provision(Action):
                 'parameters': format_parameters
             }
 
-            deployment_async_operation = self.resource_group_client.deployments.create_or_update(self._resource_group,self._vm_name,deployment_properties)
-            result = deployment_async_operation.status()
+            deployment_async_operation = self.resource_group_client.deployments.create_or_update(self.resource_group,self.vm_name,deployment_properties)
             deployment_async_operation.wait()
+            deployment_async_operation.wait()
+            result = deployment_async_operation.status()
+            
             return(True,result)
 
         except Exception as e:
