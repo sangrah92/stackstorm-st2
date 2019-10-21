@@ -4,8 +4,6 @@ from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import DeploymentMode
 
-# from st2client.client import Client
-# from st2client.models import KeyValuePair
 import os,sys,json,random
 
 class arm_template_provision(Action):
