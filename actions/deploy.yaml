@@ -1,6 +1,6 @@
 ---
 name: deploy
-pack: dd_shieldx_azure_vm_provision
+pack: dd_shieldx
 runner_type: "python-script"
 description: deploy azure VM 
 enabled: true

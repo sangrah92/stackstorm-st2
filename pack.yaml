@@ -1,6 +1,6 @@
 ---
-ref: dd_shieldx_azure_vm_provision
-name: DD Azure VM provision
+ref: dd_shieldx
+name: DD Shieldx
 description: This stackstorm pack to create azure Vm 
 keywords:
   - azure
