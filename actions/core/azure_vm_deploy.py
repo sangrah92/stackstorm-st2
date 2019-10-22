@@ -53,10 +53,17 @@ class arm_template_provision(Action):
 
             deployment_async_operation = self.resource_group_client.deployments.create_or_update(self.resource_group,self.vm_name,deployment_properties)
             deployment_async_operation.wait()
-            deployment_async_operation.wait()
             result = deployment_async_operation.status()
-            
             return(True,result)
 
         except Exception as e:
             return(False,str(e)) 
+    
+    
+    def delete_resources(self):
+        try:
+            self.resource_group_client.resource_groups.delete(self.resource_group)
+        except Exception as e:
+            return (False,str(e))
+        else:
+            return(True,"Success, Resource group along with VM is deleted")

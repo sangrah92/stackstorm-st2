@@ -1,10 +1,9 @@
----
-name: deploy
+name: destroy
 pack: dd_shieldx
 runner_type: "python-script"
-description: deploy azure VM 
+description: destroy azure resource group and VM 
 enabled: true
-entry_point: deploy.py
+entry_point: destroy.py
 parameters:
     client_id:
         type: string
@@ -34,13 +33,6 @@ parameters:
     region:
         type: string
         description: region 
-        required: true
+        required: false
         position: 6
         default: "centralus"
-    template_file:
-        type: string
-        description: template path file 
-        required: false
-        position: 7
-        default: "SXDEMODEPLOYMENT.json"
-    
