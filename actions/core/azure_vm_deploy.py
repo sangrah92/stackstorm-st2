@@ -8,33 +8,33 @@ import os,sys,json,random
 
 class arm_template_provision(Action):
     
-    
     def __init__(self,config):
         super(arm_template_provision, self).__init__(config)
 
-    def auth(self,client_id,resource_group, subscription_number, tanent_id, serect, region):
-        self.vm_name = 'shield-x_POC_UM'+str(random.randint(1,1001))
-        self.resource_group = resource_group
-        self.location = region
+    def auth(self,client_id, tanent_id, serect):
         credentials = ServicePrincipalCredentials(
             client_id = client_id,
             secret = serect,
             tenant = tanent_id
         )
-        resource_group_params = {'location':region}
+        return credentials 
         
-        self.resource_group_client = ResourceManagementClient(
+    def get_resource_group_client(self,credentials,subscription_id):
+        resource_group_client = ResourceManagementClient(
             credentials,
-            subscription_number
+            subscription_id
         )
-        
-        self.resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)
+        return resource_group_client
+    
+    def create_reource_group(self, resource_group_client, region, resource_group):
+        response = resource_group_client.resource_groups.create_or_update(resource_group, {'location':region})
+        return response
         
     def get_template_path(self, existing_template_path):
         file_path = os.path.dirname(os.path.realpath(__file__+"/../"))
         return file_path + "/templates/"+ existing_template_path
     
-    def deploy_vm(self, existing_template_path):
+    def deploy_vm(self, existing_template_path, resource_group_client, resource_group_name, vm_name):
         try:
             template_path = self.get_template_path(existing_template_path)
 
@@ -51,7 +51,7 @@ class arm_template_provision(Action):
                 'parameters': format_parameters
             }
 
-            deployment_async_operation = self.resource_group_client.deployments.create_or_update(self.resource_group,self.vm_name,deployment_properties)
+            deployment_async_operation = resource_group_client.deployments.create_or_update(resource_group_name,vm_name,deployment_properties)
             deployment_async_operation.wait()
             result = deployment_async_operation.status()
             return(True,result)
@@ -60,10 +60,10 @@ class arm_template_provision(Action):
             return(False,str(e)) 
     
     
-    def delete_resources(self):
+    def delete_resources(self, resource_group_client, resource_group):
         try:
-            self.resource_group_client.resource_groups.delete(self.resource_group)
+            response = resource_group_client.resource_groups.delete(resource_group)
         except Exception as e:
             return (False,str(e))
         else:
-            return(True,"Success, Resource group along with VM is deleted")
+            return(True,str(response) + "Success, Resource group along with VM is deleted")

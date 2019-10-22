@@ -1,10 +1,10 @@
 ---
-name: deploy
+name: authenticate
 pack: dd_shieldx
 runner_type: "python-script"
-description: deploy azure VM 
+description: authenticate credentials 
 enabled: true
-entry_point: deploy.py
+entry_point: authenticate.py
 parameters:
     client_id:
         type: string

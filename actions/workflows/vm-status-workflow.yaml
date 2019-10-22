@@ -1,2 +1,16 @@
 version: 1.0
-description: A basic workflow that runs an arbitrary linux command.
+description: A workflow to crate resource group and deploy VM and get status of resource creation in azure portal.
+input:
+  - client_id
+  - resource_group
+  - subscription_number
+  - tanent_id
+  - serect
+  - region
+  - template_file
+
+tasks:
+  resource_group_create:
+    action: dd_shieldx.deploy client_id=<% ctx(client_id) %> resource_group=<% ctx(resource_group) %> subscription_number=<% ctx(subscription_number) %> tanent_id=<% ctx(tanent_id) %> serect=<% ctx(serect) %> region=<% ctx(region) %> template_file=<% ctx(template_file) %>
+    next:
+      - do: task2
