@@ -43,7 +43,7 @@ tasks:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
         do: 
-          - deploy_vm
+          - finish_error
   deploy_vm:
     action: dd_shieldx.vm_deploy
     input:
@@ -67,7 +67,10 @@ tasks:
     action: core.echo
     input:
       message: "Azure vm created successfully"    
-
+  finish_error:
+    action: core.echo
+      input:
+        message: "VM deploy occured an error"
 output:
   - result: '{{ ctx().result }}'
   - error: '{{ ctx().error }}'        
