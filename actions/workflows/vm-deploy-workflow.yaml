@@ -29,7 +29,11 @@ tasks:
       - when: <% succeeded() %>
         publish:
           - result: "{{ result() }}"
-
+      - when: <% failed() %>
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+          
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
