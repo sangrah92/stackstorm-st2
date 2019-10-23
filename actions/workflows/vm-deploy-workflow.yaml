@@ -42,17 +42,17 @@ tasks:
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(auth_credentials).credentials %> 
-      subscription_id: <% task(auth_credentials).subscription_id %>
-      region: <% task(auth_credentials).location %>
-      resource_group: <% task(auth_credentials).resource_group %>
+      credentials: <% task(auth_credentials) %> 
+      # subscription_id: <% task(auth_credentials).subscription_id %>
+      # region: <% task(auth_credentials).location %>
+      # resource_group: <% task(auth_credentials).resource_group %>
     next:
       - when: <% succeeded() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %> 
         do:
-          - deploy_vm
+          - finish
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
