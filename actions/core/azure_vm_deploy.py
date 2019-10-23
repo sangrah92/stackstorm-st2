@@ -15,7 +15,7 @@ class arm_template_provision(Action):
         credentials = ServicePrincipalCredentials(
             client_id = client_id,
             secret = serect,
-            tenant = tanent_id
+            tenant = tanent_id,
         )
         data = dict()
         data['credentials'] = credentials
