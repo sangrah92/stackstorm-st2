@@ -34,7 +34,7 @@ parameters:
     region:
         type: string
         description: region 
-        required: true
+        required: false
         position: 6
         default: "centralus"
     template_file:
