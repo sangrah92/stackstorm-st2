@@ -15,7 +15,7 @@ vars:
 
 tasks:
 
-  auth:
+  auth_credentials:
     action: dd_shieldx.authenticate 
     input: 
       client_id: <% ctx(client_id) %> 
@@ -28,19 +28,20 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - result: "{{ result() }}"
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
-          
+
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(auth).result.result.credentials %> 
-      subscription_id: <% task(auth).result.result.subscription_id %>
-      region: <% task(auth).result.result.location %>
-      resource_group: <% task(auth).result.result.region %>
+      credentials: <% task(auth_credentials).result.result.credentials %> 
+      subscription_id: <% task(auth_credentials).result.result.subscription_id %>
+      region: <% task(auth_credentials).result.result.location %>
+      resource_group: <% task(auth_credentials).result.result.region %>
     next:
       - when: <% succeeded() %>
         publish:
