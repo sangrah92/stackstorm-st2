@@ -8,7 +8,7 @@ input:
   - resource_group
   - region
   - template_file
-  
+
 vars:
   - result: ''
   - error: ''
@@ -31,10 +31,10 @@ tasks:
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(authenticate).credentials %> 
-      subscription_id: <% task(authenticate).subscription_id %>
-      region: <% task(authenticate).location %>
-      resource_group: <% task(authenticate).region %>
+      credentials: <% task(authenticate).result.result.credentials %> 
+      subscription_id: <% task(authenticate).result.result.subscription_id %>
+      region: <% task(authenticate).result.result.location %>
+      resource_group: <% task(authenticate).result.result.region %>
     next:
       - when: <% succeeded() %>
         publish:
