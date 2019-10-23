@@ -34,7 +34,7 @@ class arm_template_provision(Action):
     
     def create_reource_group(self, resource_group_client, region, resource_group):
         response = resource_group_client.resource_groups.create_or_update(resource_group, {'location':region})
-        return return(True,response)
+        return(True,response)
         
     def get_template_path(self, existing_template_path):
         file_path = os.path.dirname(os.path.realpath(__file__+"/../"))
