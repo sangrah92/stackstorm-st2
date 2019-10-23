@@ -3,7 +3,7 @@ description: A workflow to crate resource group and deploy VM and get status of 
 input:
   - client_id
   - serect
-  - tanent_id
+  - tenant_id
   - subscription_number
   - resource_group
   - region
@@ -20,7 +20,7 @@ tasks:
     input: 
       client_id: <% ctx(client_id) %> 
       serect: <% ctx(serect) %> 
-      tanent_id: <% ctx(tanent_id) %> 
+      tenant_id: <% ctx(tenant_id) %> 
       subscription_number: <% ctx(subscription_number) %> 
       resource_group: <% ctx(resource_group) %> 
       region: <% ctx(region) %> 
@@ -38,7 +38,7 @@ tasks:
           - stderr: <% result().stderr %>
         do:
           - resource_group_creation
-          
+
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:

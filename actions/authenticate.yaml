@@ -16,7 +16,7 @@ parameters:
         description: resource group name 
         required: true
         position: 2
-    tanent_id:
+    tenant_id:
         type: string
         description: subscription number 
         required: true
