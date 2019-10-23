@@ -11,11 +11,12 @@ class arm_template_provision(Action):
     def __init__(self,config):
         super(arm_template_provision, self).__init__(config)
 
-    def auth(self,client_id, serect, tanent_id, subscription_number, resource_group,region, template_file):
+    def auth(self,client_id, serect, tenant_id, subscription_number, resource_group,region, template_file):
+        print(client_id, serect, tenant_id)
         credentials = ServicePrincipalCredentials(
             client_id,
             serect,
-            tenant = tanent_id,
+            tenant = tenant_id,
         )
         data = dict()
         data['credentials'] = credentials
