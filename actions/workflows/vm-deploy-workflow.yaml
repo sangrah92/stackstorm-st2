@@ -28,7 +28,26 @@ tasks:
       - when: <% succeeded() %>
         publish:
           - result: "{{ result() }}"
-  
+  resource_group_creation:
+    action: dd_shieldx.create_resource_group 
+    input:
+      credentials: <% task(authenticate).result.result.data.credentials %> 
+      subscription_id: <% task(authenticate).result.result.data.subscription_id %>
+      region: <% task(authenticate).result.result.data.location %>
+      resource_group: <% task(authenticate).result.result.data.region %>
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %> 
+        do:
+          - deploy_vm  
+      - when: <% failed() %>
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+        do: 
+          - finish_error
 output:
-  - result: '{{ task(authenticate).result.result.data  }}'
-  - error: '{{ ctx().error }}'        
+  - result: '{{ ctx(result)  }}'
+  - error: '{{ ctx(error) }}'        
