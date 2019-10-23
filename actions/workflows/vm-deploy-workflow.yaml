@@ -37,7 +37,7 @@ tasks:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
         do:
-          - resource_group_creation
+          - finish_error
 
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
@@ -51,12 +51,14 @@ tasks:
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %> 
-        
+        do:
+          - deploy_vm
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
-        
+        do:
+          - finish_error
   deploy_vm:
     action: dd_shieldx.vm_deploy
     input:
@@ -75,7 +77,7 @@ tasks:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
         do:
-          - finish
+          - finish_error
   finish:
     action: core.echo
     input:
