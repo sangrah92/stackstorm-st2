@@ -38,7 +38,7 @@ tasks:
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(auth_credentials).result %> 
+      credentials: <% task(auth_credentials).result.result %> 
       # subscription_id: <% task(auth_credentials).subscription_id %>
       # region: <% task(auth_credentials).location %>
       # resource_group: <% task(auth_credentials).resource_group %>
