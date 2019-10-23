@@ -15,9 +15,31 @@ vars:
 
 tasks:
 
-  auth_credentials:
-    action: dd_shieldx.authenticate 
-    input: 
+  # auth_credentials:
+  #   action: dd_shieldx.authenticate 
+  #   input: 
+  #     client_id: <% ctx(client_id) %> 
+  #     serect: <% ctx(serect) %> 
+  #     tenant_id: <% ctx(tenant_id) %> 
+  #     subscription_number: <% ctx(subscription_number) %> 
+  #     resource_group: <% ctx(resource_group) %> 
+  #     region: <% ctx(region) %> 
+  #     template_file: <% ctx(template_file) %>
+  #   next:
+  #     - when: <% succeeded() %>
+  #       publish:
+  #         - result: "{{ result() }}"
+  #       do:
+  #         - resource_group_creation
+  #     - when: <% failed() %>
+  #       publish:
+  #         - error: "{{ result() }}"
+  #       do:
+  #         - finish_error
+
+  resource_group_creation:
+    action: dd_shieldx.create_resource_group 
+    input:
       client_id: <% ctx(client_id) %> 
       serect: <% ctx(serect) %> 
       tenant_id: <% ctx(tenant_id) %> 
@@ -28,55 +50,34 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - result: "{{ result().stdout }}"
+          - result: "{{ result() }}" 
         do:
-          - resource_group_creation
+          - deploy_vm
       - when: <% failed() %>
         publish:
-          - error: "{{ result().stderr }}"
+          - error: "{{ result() }}"
         do:
           - finish_error
 
-  resource_group_creation:
-    action: dd_shieldx.create_resource_group 
+  deploy_vm:
+    action: dd_shieldx.vm_deploy
     input:
-      credentials: <% task(auth_credentials).result %> 
-      # subscription_id: <% task(auth_credentials).subscription_id %>
-      # region: <% task(auth_credentials).location %>
-      # resource_group: <% task(auth_credentials).resource_group %>
+      existing_template_path: <% ctx(template_file) %>
+      resource_group_client: <% task(resource_group_creation).result %>
+      resource_group: <% ctx(resource_group) %>
     next:
       - when: <% succeeded() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %> 
         do:
-          - finish
+          - finish  
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
         do:
           - finish_error
-
-  # deploy_vm:
-  #   action: dd_shieldx.vm_deploy
-  #   input:
-  #     existing_template_path: <% task(auth_credentials).template_file %>
-  #     resource_group_client: <% task(resource_group_creation) %>
-  #     resource_group: <% task(auth_credentials).resource_group %>
-  #   next:
-  #     - when: <% succeeded() %>
-  #       publish:
-  #         - stdout: <% result().stdout %>
-  #         - stderr: <% result().stderr %> 
-  #       do:
-  #         - finish  
-  #     - when: <% failed() %>
-  #       publish:
-  #         - stdout: <% result().stdout %>
-  #         - stderr: <% result().stderr %>
-  #       do:
-  #         - finish_error
   finish:
     action: core.echo
     input:
