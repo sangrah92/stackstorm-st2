@@ -62,9 +62,9 @@ tasks:
   deploy_vm:
     action: dd_shieldx.vm_deploy
     input:
-      existing_template_path: <% task(authenticate).result.result.template_file %>
+      existing_template_path: <% task(auth_credentials).result.result.template_file %>
       resource_group_client: <% task(resource_group_creation).result.result %>
-      resource_group: <% task(authenticate).result.result.resource_group %>
+      resource_group: <% task(auth_credentials).result.result.resource_group %>
     next:
       - when: <% succeeded() %>
         publish:
