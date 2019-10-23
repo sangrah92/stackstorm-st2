@@ -6,9 +6,10 @@ __all__ = [
 
 class create_resource_group(azure_vm_deploy.arm_template_provision):
     
-    def run(self,credentials, azure_subscription_id, region, resource_group):
+    def run(self,azure_client_id, azure_client_secret, azure_tenant_id, azure_subscription_id, region, resource_group):
         print("=============================Creating Resource Group=====================================")
         # creating resource group
+        credentials = self.auth(azure_client_id, azure_client_secret, azure_tenant_id)
         resource_group_client = self.get_resource_group_client(credentials,azure_subscription_id)
         resource_group_params = { 'location': region } 
         response = resource_group_client.resource_groups.create_or_update(resource_group, resource_group_params)

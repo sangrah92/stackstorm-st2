@@ -15,36 +15,15 @@ vars:
 
 tasks:
 
-  auth_credentials:
-    action: dd_shieldx.authenticate 
-    input: 
+  resource_group_creation:
+    action: dd_shieldx.create_resource_group 
+    input:
       azure_client_id: <% ctx(azure_client_id) %> 
       azure_client_secret: <% ctx(azure_client_secret) %> 
       azure_tenant_id: <% ctx(azure_tenant_id) %> 
       azure_subscription_id: <% ctx(azure_subscription_id) %> 
-      resource_group: <% ctx(resource_group) %> 
-      region: <% ctx(region) %> 
-      template_file: <% ctx(template_file) %>
-    next:
-      - when: <% succeeded() %>
-        publish:
-          - result: "{{ result() }}"
-        do:
-          - resource_group_creation
-      - when: <% failed() %>
-        publish:
-          - error: "{{ result() }}"
-        do:
-          - finish_error
-
-  resource_group_creation:
-    action: dd_shieldx.create_resource_group 
-    input:
-      credentials: <% task(auth_credentials).result %>
-      azure_subscription_id: <% ctx(azure_subscription_id) %> 
       region: <% ctx(region) %> 
       resource_group: <% ctx(resource_group) %>
-  
     next:
       - when: <% succeeded() %>
         publish:
@@ -60,7 +39,9 @@ tasks:
   deploy_vm:
     action: dd_shieldx.vm_deploy
     input:
-      credentials: <% task(auth_credentials).result %>
+      azure_client_id: <% ctx(azure_client_id) %> 
+      azure_client_secret: <% ctx(azure_client_secret) %> 
+      azure_tenant_id: <% ctx(azure_tenant_id) %> 
       azure_subscription_id: <% ctx(azure_subscription_id) %>
       existing_template_path: <% ctx(template_file) %>
       resource_group: <% ctx(resource_group) %>
