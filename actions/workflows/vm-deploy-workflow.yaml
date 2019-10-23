@@ -14,7 +14,7 @@ vars:
   - error: ''
 
 tasks:
-  authenticate:
+  auth:
     action: dd_shieldx.authenticate 
     input: 
       client_id: <% ctx(client_id) %> 
@@ -31,50 +31,22 @@ tasks:
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(authenticate).result.result.data.credentials %> 
-      subscription_id: <% task(authenticate).result.result.data.subscription_id %>
-      region: <% task(authenticate).result.result.data.location %>
-      resource_group: <% task(authenticate).result.result.data.region %>
+      credentials: <% task(auth).result.result.data.credentials %> 
+      subscription_id: <% task(auth).result.result.data.subscription_id %>
+      region: <% task(auth).result.result.data.location %>
+      resource_group: <% task(auth).result.result.data.region %>
     next:
       - when: <% succeeded() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %> 
-        do:
-          - deploy_vm  
+        
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
-        do: 
-          - finish_error
-  deploy_vm:
-    action: dd_shieldx.vm_deploy
-    input:
-      existing_template_path: <% task(authenticate).template_file %>
-      resource_group_client: <% task(resource_group_creation) %>
-      resource_group: <% task(authenticate).resource_group %>
-    next:
-      - when: <% succeeded() %>
-        publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %> 
-        do:
-          - finish  
-      - when: <% failed() %>
-        publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %>
-        do:
-          - finish
-  finish:
-    action: core.echo
-    input:
-      message: "Azure vm created successfully"    
-  finish_error:
-    action: core.echo
-    input:
-      message: "VM deploy occured an error"
+        
+  
 output:
   - result: '{{ ctx(result)  }}'
   - error: '{{ ctx(error) }}'        

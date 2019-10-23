@@ -23,7 +23,7 @@ class arm_template_provision(Action):
         data['subscription_id'] = subscription_number 
         data['location'] = region 
         data['template_file'] = template_file 
-        return data 
+        return(True,data) 
         
     def get_resource_group_client(self,credentials,subscription_id):
         resource_group_client = ResourceManagementClient(
@@ -34,7 +34,7 @@ class arm_template_provision(Action):
     
     def create_reource_group(self, resource_group_client, region, resource_group):
         response = resource_group_client.resource_groups.create_or_update(resource_group, {'location':region})
-        return response
+        return return(True,response)
         
     def get_template_path(self, existing_template_path):
         file_path = os.path.dirname(os.path.realpath(__file__+"/../"))
