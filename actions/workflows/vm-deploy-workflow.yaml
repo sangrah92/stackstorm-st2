@@ -14,6 +14,7 @@ vars:
   - error: ''
 
 tasks:
+
   auth:
     action: dd_shieldx.authenticate 
     input: 
@@ -28,13 +29,14 @@ tasks:
       - when: <% succeeded() %>
         publish:
           - result: "{{ result() }}"
+
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(auth).result.result.data.credentials %> 
-      subscription_id: <% task(auth).result.result.data.subscription_id %>
-      region: <% task(auth).result.result.data.location %>
-      resource_group: <% task(auth).result.result.data.region %>
+      credentials: <% task(auth).result.result.credentials %> 
+      subscription_id: <% task(auth).result.result.subscription_id %>
+      region: <% task(auth).result.result.location %>
+      resource_group: <% task(auth).result.result.region %>
     next:
       - when: <% succeeded() %>
         publish:
