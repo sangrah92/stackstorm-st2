@@ -6,18 +6,23 @@ description: deploy azure VM
 enabled: true
 entry_point: deploy.py
 parameters:
+    credentials:
+        type: object
+        description: credentials to create resource group client
+        required: true
+        position: 1
+    subscription_number:
+        type: string
+        description: subscription number
+        required: true
+        position: 2
     existing_template_path:
         type: string
         description: Template file to create VM
         required: true
-        position: 1
-    resource_group_client:
-        type: object
-        description: resource group client instance
-        required: true
-        position: 2
+        position: 3
     resource_group:
         type: string
         description: Resource group name
         required: true
-        position: 3
+        position: 4

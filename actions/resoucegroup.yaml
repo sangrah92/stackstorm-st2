@@ -6,19 +6,24 @@ description: creation of resource group
 enabled: true
 entry_point: resourcegroup.py
 parameters:
-    resource_group_client:
+    credentials:
         type: object
-        description: resource group client
+        description: credentials
         required: true
         position: 1
+    subscription_number:
+        type: string
+        description: subscription ID 
+        required: false
+        position: 2
     region:
         type: string
         description: region 
         required: false
-        position: 2
+        position: 3
         default: "centralus"
     resource_group:
         type: string
         description: resource group name
         required: true
-        position: 3
+        position: 4

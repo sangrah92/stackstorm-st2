@@ -40,7 +40,8 @@ tasks:
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      resource_group_client: <% task(auth_credentials).result %> 
+      credentials: <% task(auth_credentials).result %>
+      subscription_number: <% ctx(subscription_number) %> 
       region: <% ctx(region) %> 
       resource_group: <% ctx(resource_group) %>
   
@@ -59,8 +60,9 @@ tasks:
   deploy_vm:
     action: dd_shieldx.vm_deploy
     input:
+      credentials: <% task(auth_credentials).result %>
+      subscription_number: <% ctx(subscription_number) %>
       existing_template_path: <% ctx(template_file) %>
-      resource_group_client: <% task(auth_credentials).result %>
       resource_group: <% ctx(resource_group) %>
     next:
       - when: <% succeeded() %>
