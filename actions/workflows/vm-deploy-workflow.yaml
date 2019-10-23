@@ -69,8 +69,8 @@ tasks:
       message: "Azure vm created successfully"    
   finish_error:
     action: core.echo
-      input:
-        message: "VM deploy occured an error"
+    input:
+      message: "VM deploy occured an error"
 output:
   - result: '{{ ctx().result }}'
   - error: '{{ ctx().error }}'        
