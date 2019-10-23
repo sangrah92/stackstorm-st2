@@ -1,5 +1,5 @@
 ---
-ref: shieldx-vm-deply
+ref: dd_shieldx
 name: DD Shieldx
 description: This stackstorm pack to create azure Vm 
 keywords:
