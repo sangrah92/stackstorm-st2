@@ -11,13 +11,19 @@ class arm_template_provision(Action):
     def __init__(self,config):
         super(arm_template_provision, self).__init__(config)
 
-    def auth(self,client_id, tanent_id, serect):
+    def auth(self,client_id, serect, tanent_id, subscription_number, resource_group,region, template_file):
         credentials = ServicePrincipalCredentials(
             client_id = client_id,
             secret = serect,
             tenant = tanent_id
         )
-        return credentials 
+        data = dict()
+        data['credentials'] = credentials
+        data['resource_group'] = resource_group 
+        data['subscription_id'] = subscription_number 
+        data['location'] = region 
+        data['template_file'] = template_file 
+        return data 
         
     def get_resource_group_client(self,credentials,subscription_id):
         resource_group_client = ResourceManagementClient(
@@ -34,8 +40,9 @@ class arm_template_provision(Action):
         file_path = os.path.dirname(os.path.realpath(__file__+"/../"))
         return file_path + "/templates/"+ existing_template_path
     
-    def deploy_vm(self, existing_template_path, resource_group_client, resource_group_name, vm_name):
+    def deploy_vm(self, existing_template_path, resource_group_client, resource_group):
         try:
+            vm_name = "shield_x_POC_UM_{}".format(random.randint(1,1001))
             template_path = self.get_template_path(existing_template_path)
 
             with open(template_path) as f:
@@ -51,7 +58,7 @@ class arm_template_provision(Action):
                 'parameters': format_parameters
             }
 
-            deployment_async_operation = resource_group_client.deployments.create_or_update(resource_group_name,vm_name,deployment_properties)
+            deployment_async_operation = resource_group_client.deployments.create_or_update(resource_group,vm_name,deployment_properties)
             deployment_async_operation.wait()
             result = deployment_async_operation.status()
             return(True,result)

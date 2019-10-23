@@ -1,0 +1,28 @@
+---
+name: create_resource_group
+pack: dd_shieldx
+runner_type: "python-script"
+description: creation of resource group
+enabled: true
+entry_point: resourcegroup.py
+parameters:
+    credentials:
+        type: object
+        description: credentials of azure VM
+        required: true
+        position: 1
+    subscription_id:    
+        type: string
+        description: Subscription ID
+        required: true
+        position: 2
+    region: 
+        type: string
+        description: Region
+        required: true
+        position: 3
+    resource_group:
+        type: string
+        description: Resource Group
+        required: true
+        position: 4

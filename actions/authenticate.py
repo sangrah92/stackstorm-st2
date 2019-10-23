@@ -5,5 +5,7 @@ __all__ = [
 ]
 class authenticate(azure_vm_deploy.arm_template_provision):
 
-    def run(self, client_id,resource_group, subscription_number, tanent_id, serect, region, template_file):
-        return self.auth(client_id,resource_group, subscription_number, tanent_id, serect, region)
+    def run(self, client_id, serect, tanent_id, subscription_number, resource_group,region, template_file):
+        print("==================================================================")
+        print("Authenticating credentials ")
+        return self.auth(client_id, serect, tanent_id, subscription_number, resource_group,region, template_file)

@@ -1,0 +1,23 @@
+---
+name: vm_deploy
+pack: dd_shieldx
+runner_type: "python-script"
+description: deploy azure VM
+enabled: true
+entry_point: deploy.py
+parameters:
+    existing_template_path:
+        type: string
+        description: Template file to create VM
+        required: true
+        position: 1
+    resource_group_client:
+        type: object
+        description: resource group client instance
+        required: true
+        position: 2
+    resource_group:
+        type: string
+        description: Resource group name
+        required: true
+        position: 3
