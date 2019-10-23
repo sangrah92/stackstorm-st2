@@ -1,5 +1,5 @@
 ---
-name: shieldx-vm-deply
+name: shieldx-vm-deploy
 pack: dd_shieldx
 description: Run a local python script
 runner_type: orquesta

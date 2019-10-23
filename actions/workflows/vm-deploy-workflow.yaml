@@ -8,6 +8,10 @@ input:
   - resource_group
   - region
   - template_file
+  
+vars:
+  - result: ''
+  - error: ''
 
 tasks:
   authenticate:
