@@ -30,18 +30,22 @@ tasks:
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
+        do:
+          - resource_group_creation
       - when: <% failed() %>
         publish:
           - stdout: <% result().stdout %>
           - stderr: <% result().stderr %>
-
+        do:
+          - resource_group_creation
+          
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
       credentials: <% task(auth_credentials).result.result.credentials %> 
       subscription_id: <% task(auth_credentials).result.result.subscription_id %>
       region: <% task(auth_credentials).result.result.location %>
-      resource_group: <% task(auth_credentials).result.result.region %>
+      resource_group: <% task(auth_credentials).result.result.resource_group %>
     next:
       - when: <% succeeded() %>
         publish:
