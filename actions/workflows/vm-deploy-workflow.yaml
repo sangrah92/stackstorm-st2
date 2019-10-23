@@ -59,25 +59,25 @@ tasks:
           - stderr: <% result().stderr %>
         do:
           - finish_error
-  deploy_vm:
-    action: dd_shieldx.vm_deploy
-    input:
-      existing_template_path: <% task(auth_credentials).template_file %>
-      resource_group_client: <% task(resource_group_creation) %>
-      resource_group: <% task(auth_credentials).resource_group %>
-    next:
-      - when: <% succeeded() %>
-        publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %> 
-        do:
-          - finish  
-      - when: <% failed() %>
-        publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %>
-        do:
-          - finish_error
+  # deploy_vm:
+  #   action: dd_shieldx.vm_deploy
+  #   input:
+  #     existing_template_path: <% task(auth_credentials).template_file %>
+  #     resource_group_client: <% task(resource_group_creation) %>
+  #     resource_group: <% task(auth_credentials).resource_group %>
+  #   next:
+  #     - when: <% succeeded() %>
+  #       publish:
+  #         - stdout: <% result().stdout %>
+  #         - stderr: <% result().stderr %> 
+  #       do:
+  #         - finish  
+  #     - when: <% failed() %>
+  #       publish:
+  #         - stdout: <% result().stdout %>
+  #         - stderr: <% result().stderr %>
+  #       do:
+  #         - finish_error
   finish:
     action: core.echo
     input:
