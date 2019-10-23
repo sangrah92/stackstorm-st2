@@ -9,10 +9,6 @@ input:
   - region
   - template_file
 
-vars:
-  - result: ''
-  - error: ''
-
 tasks:
 
   auth_credentials:
@@ -87,5 +83,5 @@ tasks:
     input:
       message: "VM deploy occured an error"
 output:
-  - result: '{{ ctx(result)  }}'
-  - error: '{{ ctx(error) }}'        
+  - stdout: <% ctx(stdout) %>
+  - stderr: <% ctx(stderr) %>        
