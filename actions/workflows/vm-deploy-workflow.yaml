@@ -9,6 +9,10 @@ input:
   - region
   - template_file
 
+vars:
+  - result: ''
+  - error: ''
+
 tasks:
 
   auth_credentials:
@@ -24,21 +28,19 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %>
+          - result: "{{ result() }}"
         do:
           - resource_group_creation
       - when: <% failed() %>
         publish:
-          - stdout: <% result().stdout %>
-          - stderr: <% result().stderr %>
+          - error: "{{ result() }}"
         do:
           - finish_error
 
   resource_group_creation:
     action: dd_shieldx.create_resource_group 
     input:
-      credentials: <% task(auth_credentials).result.result %> 
+      credentials: <% task(auth_credentials).result %> 
       # subscription_id: <% task(auth_credentials).subscription_id %>
       # region: <% task(auth_credentials).location %>
       # resource_group: <% task(auth_credentials).resource_group %>
@@ -84,5 +86,5 @@ tasks:
     input:
       message: "VM deploy occured an error"
 output:
-  - stdout: <% ctx(stdout) %>
-  - stderr: <% ctx(stderr) %>        
+  - result: <% ctx(result) %>
+  - error: <% ctx(error) %>        
