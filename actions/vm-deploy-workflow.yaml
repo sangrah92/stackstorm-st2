@@ -1,0 +1,45 @@
+---
+name: shieldx-vm-deply
+pack: dd_shieldx
+description: Run a local python script
+runner_type: orquesta
+entry_point: workflows/vm-deploy-workflow.yaml
+enabled: true
+parameters:
+  client_id:
+      type: string
+      description: Client ID
+      required: true
+      position: 1
+  serect:
+      type: string
+      description: resource group name 
+      required: true
+      position: 2
+  tanent_id:
+      type: string
+      description: subscription number 
+      required: true
+      position: 3
+  subscription_number:
+      type: string
+      description: tananent ID  
+      required: true
+      position: 4
+  resource_group:
+      type: string
+      description: secrect 
+      required: true
+      position: 5
+  region:
+      type: string
+      description: region 
+      required: true
+      position: 6
+      default: "centralus"
+  template_file:
+      type: string
+      description: template path file 
+      required: false
+      position: 7
+      default: "SXDEMODEPLOYMENT.json"
