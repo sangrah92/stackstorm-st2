@@ -13,22 +13,22 @@ parameters:
         position: 1
     serect:
         type: string
-        description: resource group name 
+        description: client secrect 
         required: true
         position: 2
     tenant_id:
         type: string
-        description: subscription number 
+        description: tananent ID 
         required: true
         position: 3
     subscription_number:
         type: string
-        description: tananent ID  
+        description: subscription number 
         required: true
         position: 4
     resource_group:
         type: string
-        description: secrect 
+        description: resource group name
         required: true
         position: 5
     region:
