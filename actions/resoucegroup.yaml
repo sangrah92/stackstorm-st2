@@ -6,40 +6,19 @@ description: creation of resource group
 enabled: true
 entry_point: resourcegroup.py
 parameters:
-    client_id:
-        type: string
-        description: Client ID
+    resource_group_client:
+        type: object
+        description: resource group client
         required: true
         position: 1
-    serect:
-        type: string
-        description: client secrect 
-        required: true
-        position: 2
-    tenant_id:
-        type: string
-        description: tananent ID 
-        required: true
-        position: 3
-    subscription_number:
-        type: string
-        description: subscription number 
-        required: true
-        position: 4
-    resource_group:
-        type: string
-        description: resource group name
-        required: true
-        position: 5
     region:
         type: string
         description: region 
         required: false
-        position: 6
+        position: 2
         default: "centralus"
-    template_file:
+    resource_group:
         type: string
-        description: template path file 
-        required: false
-        position: 7
-        default: "SXDEMODEPLOYMENT.json"
+        description: resource group name
+        required: true
+        position: 3

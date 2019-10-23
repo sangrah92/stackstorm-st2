@@ -15,31 +15,9 @@ vars:
 
 tasks:
 
-  # auth_credentials:
-  #   action: dd_shieldx.authenticate 
-  #   input: 
-  #     client_id: <% ctx(client_id) %> 
-  #     serect: <% ctx(serect) %> 
-  #     tenant_id: <% ctx(tenant_id) %> 
-  #     subscription_number: <% ctx(subscription_number) %> 
-  #     resource_group: <% ctx(resource_group) %> 
-  #     region: <% ctx(region) %> 
-  #     template_file: <% ctx(template_file) %>
-  #   next:
-  #     - when: <% succeeded() %>
-  #       publish:
-  #         - result: "{{ result() }}"
-  #       do:
-  #         - resource_group_creation
-  #     - when: <% failed() %>
-  #       publish:
-  #         - error: "{{ result() }}"
-  #       do:
-  #         - finish_error
-
-  resource_group_creation:
-    action: dd_shieldx.create_resource_group 
-    input:
+  auth_credentials:
+    action: dd_shieldx.authenticate 
+    input: 
       client_id: <% ctx(client_id) %> 
       serect: <% ctx(serect) %> 
       tenant_id: <% ctx(tenant_id) %> 
@@ -47,6 +25,25 @@ tasks:
       resource_group: <% ctx(resource_group) %> 
       region: <% ctx(region) %> 
       template_file: <% ctx(template_file) %>
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - result: "{{ result() }}"
+        do:
+          - resource_group_creation
+      - when: <% failed() %>
+        publish:
+          - error: "{{ result() }}"
+        do:
+          - finish_error
+
+  resource_group_creation:
+    action: dd_shieldx.create_resource_group 
+    input:
+      resource_group_client: <% task(auth_credentials).result %> 
+      region: <% ctx(region) %> 
+      resource_group: <% ctx(resource_group) %>
+  
     next:
       - when: <% succeeded() %>
         publish:
@@ -63,7 +60,7 @@ tasks:
     action: dd_shieldx.vm_deploy
     input:
       existing_template_path: <% ctx(template_file) %>
-      resource_group_client: <% task(resource_group_creation).result %>
+      resource_group_client: <% task(auth_credentials).result %>
       resource_group: <% ctx(resource_group) %>
     next:
       - when: <% succeeded() %>

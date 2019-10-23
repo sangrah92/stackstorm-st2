@@ -11,20 +11,13 @@ class arm_template_provision(Action):
     def __init__(self,config):
         super(arm_template_provision, self).__init__(config)
 
-    def auth(self,client_id, serect, tenant_id, subscription_number, resource_group,region, template_file):
-        print(client_id, serect, tenant_id)
+    def auth(self,client_id, serect, tenant_id):
         credentials = ServicePrincipalCredentials(
             client_id,
             serect,
             tenant = tenant_id,
-        )
-        data = dict()
-        data['credentials'] = credentials
-        data['resource_group'] = resource_group 
-        data['subscription_id'] = subscription_number 
-        data['location'] = region 
-        data['template_file'] = template_file 
-        return(True,data) 
+        ) 
+        return credentials 
         
     def get_resource_group_client(self,credentials,subscription_id):
         resource_group_client = ResourceManagementClient(
