@@ -13,8 +13,8 @@ class arm_template_provision(Action):
 
     def auth(self,client_id, serect, tanent_id, subscription_number, resource_group,region, template_file):
         credentials = ServicePrincipalCredentials(
-            client_id = client_id,
-            secret = serect,
+            client_id,
+            serect,
             tenant = tanent_id,
         )
         data = dict()
