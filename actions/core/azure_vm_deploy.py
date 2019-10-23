@@ -16,7 +16,7 @@ class arm_template_provision(Action):
         credentials = ServicePrincipalCredentials(
             "fd8b4579-715d-4e07-a373-d490d57f6634",
             "V5p5M[:84DK/TUcD[d7mDlJKHkt=4TFL",
-            "e3cf3c98-a978-465f-8254-9d541eeea73c",
+            tenant = "e3cf3c98-a978-465f-8254-9d541eeea73c",
         )
         data = dict()
         data['credentials'] = credentials
