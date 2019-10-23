@@ -11,11 +11,11 @@ class arm_template_provision(Action):
     def __init__(self,config):
         super(arm_template_provision, self).__init__(config)
 
-    def auth(self,client_id, serect, tenant_id):
+    def auth(self,azure_client_id, azure_client_secret, azure_tenant_id):
         credentials = ServicePrincipalCredentials(
-            client_id,
-            serect,
-            tenant = tenant_id,
+            azure_client_id,
+            azure_client_secret,
+            tenant = azure_tenant_id,
         ) 
         return credentials 
         

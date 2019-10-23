@@ -1,10 +1,10 @@
 version: 1.0
 description: A workflow to crate resource group and deploy VM and get status of resource creation in azure portal.
 input:
-  - client_id
-  - serect
-  - tenant_id
-  - subscription_number
+  - azure_client_id
+  - azure_client_secret
+  - azure_tenant_id
+  - azure_subscription_id
   - resource_group
   - region
   - template_file
@@ -18,10 +18,10 @@ tasks:
   auth_credentials:
     action: dd_shieldx.authenticate 
     input: 
-      client_id: <% ctx(client_id) %> 
-      serect: <% ctx(serect) %> 
-      tenant_id: <% ctx(tenant_id) %> 
-      subscription_number: <% ctx(subscription_number) %> 
+      azure_client_id: <% ctx(azure_client_id) %> 
+      azure_client_secret: <% ctx(azure_client_secret) %> 
+      azure_tenant_id: <% ctx(azure_tenant_id) %> 
+      azure_subscription_id: <% ctx(azure_subscription_id) %> 
       resource_group: <% ctx(resource_group) %> 
       region: <% ctx(region) %> 
       template_file: <% ctx(template_file) %>
@@ -41,7 +41,7 @@ tasks:
     action: dd_shieldx.create_resource_group 
     input:
       credentials: <% task(auth_credentials).result %>
-      subscription_number: <% ctx(subscription_number) %> 
+      azure_subscription_id: <% ctx(azure_subscription_id) %> 
       region: <% ctx(region) %> 
       resource_group: <% ctx(resource_group) %>
   
@@ -61,7 +61,7 @@ tasks:
     action: dd_shieldx.vm_deploy
     input:
       credentials: <% task(auth_credentials).result %>
-      subscription_number: <% ctx(subscription_number) %>
+      azure_subscription_id: <% ctx(azure_subscription_id) %>
       existing_template_path: <% ctx(template_file) %>
       resource_group: <% ctx(resource_group) %>
     next:

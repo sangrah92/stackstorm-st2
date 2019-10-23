@@ -11,7 +11,7 @@ parameters:
         description: credentials
         required: true
         position: 1
-    subscription_number:
+    azure_subscription_id:
         type: string
         description: subscription ID 
         required: false

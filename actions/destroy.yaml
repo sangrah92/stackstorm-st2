@@ -5,7 +5,7 @@ description: destroy azure resource group and VM
 enabled: true
 entry_point: destroy.py
 parameters:
-    client_id:
+    azure_client_id:
         type: string
         description: Client ID
         required: true
@@ -15,7 +15,7 @@ parameters:
         description: resource group name 
         required: true
         position: 2
-    subscription_number:
+    azure_subscription_id:
         type: string
         description: subscription number 
         required: true
@@ -25,7 +25,7 @@ parameters:
         description: tananent ID  
         required: true
         position: 4
-    serect:
+    azure_client_secret:
         type: string
         description: secrect 
         required: true
